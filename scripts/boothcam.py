@@ -30,7 +30,7 @@ import httplib2
 from constants import SCREEN_W, SCREEN_H, WHITE, BLACK
 
 FONTSIZE=100
-font = ('Times', FONTSIZE)
+font = ('Roboto', FONTSIZE)
 
 def safe_set_led(camera, state):
     try:
@@ -111,7 +111,7 @@ def snap(can, countdown1, effect='None'):
         if effect == 'None':
             camera.capture(custom.RAW_FILENAME, resize=(1366, 768))
             snapshot = Image.open(custom.RAW_FILENAME)
-        elif effect == 'Warhol': 
+        elif effect == 'Warhol':
             #  set light to R, take photo, G, take photo, B, take photo, Y, take photo
             # merge results into one image
             setLights(255, 0, 0) ## RED
@@ -143,10 +143,10 @@ def snap(can, countdown1, effect='None'):
             snapshot.paste(Image.open(custom.RAW_FILENAME[:-4] + '_2.' + custom.EXT).resize((683, 384)), (683,   0, 1366, 384))
             snapshot.paste(Image.open(custom.RAW_FILENAME[:-4] + '_3.' + custom.EXT).resize((683, 384)), (  0, 384,  683, 768))
             snapshot.paste(Image.open(custom.RAW_FILENAME[:-4] + '_4.' + custom.EXT).resize((683, 384)), (683, 384, 1366, 768))
-            
+
         camera.close()
-            
-    
+
+
         if custom.logo is not None:
             # snapshot.paste(logo,(0,SCREEN_H -lysize ),logo)
             # snapshot.paste(custom.logo,(SCREEN_W/2 - custom.logo.size[0]/2,
@@ -191,4 +191,4 @@ def googleUpload(filen):
         photo = client.InsertPhotoSimple(album_url,'NoVa Snap',custom.photoCaption, filen ,content_type='image/jpeg')
     else:
         raise ValueError("albumID not set")
-        
+

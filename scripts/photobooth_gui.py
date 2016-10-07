@@ -19,7 +19,7 @@ from constants import *
 
 ## This is a simple GUI, so we allow the root singleton to do the legwork
 root = Tk()
-root.attributes("-fullscreen",True)
+# root.attributes("-fullscreen",True)
 
 def screenshot(*args):
     import screenshot
@@ -69,7 +69,7 @@ def launch_tkkb(*args):
         tkkb.transient(root)
         tkkb_button.config(command=kill_tkkb, text="Close KB")
         tkkb.protocol("WM_DELETE_WINDOW", kill_tkkb)
-        
+
 def kill_tkkb():
     '''
     Delete on screen keyboard program called tkkb-keyboard.
@@ -94,7 +94,7 @@ def display_image(im=None):
     display image im in GUI window
     '''
     global image_tk
-    
+
     x,y = im.size
     x = int(x / SCALE)
     y = int(y / SCALE)
@@ -105,8 +105,8 @@ def display_image(im=None):
     ## delete all canvas elements with "image" in the tag
     can.delete("image")
     can.create_image([(WIDTH + x) / 2 - x/2,
-                      0 + y / 2], 
-                     image=image_tk, 
+                      0 + y / 2],
+                     image=image_tk,
                      tags="image")
 
 def timelapse_due():
@@ -128,7 +128,7 @@ def refresh_oauth2_credentials():
         else:
             print 'refresh failed'
         root.after(custom.oauth2_refresh_period, refresh_oauth2_credentials)
-    
+
 def check_and_snap(force=False, countdown1=None):
     '''
     Check button status and snap a photo if button has been pressed.
@@ -137,7 +137,7 @@ def check_and_snap(force=False, countdown1=None):
     countdown1 -- starting value for countdown timer
     '''
     global  image_tk, Button_enabled, last_snap, signed_in
-    
+
     if countdown1 is None:
         countdown1 = custom.countdown1
     if signed_in:
@@ -153,7 +153,7 @@ def check_and_snap(force=False, countdown1=None):
         # can.delete("text")
         # can.create_text(WIDTH/2, HEIGHT - STATUS_H_OFFSET, text="Press button when ready", font=custom.CANVAS_FONT, tags="text")
         # can.update()
-        
+
     ## get command string from alamode
 #    command = ser.readline().strip()
     command=""
@@ -162,7 +162,7 @@ def check_and_snap(force=False, countdown1=None):
         Button_enabled = False
         can.delete("text")
         can.update()
-        
+
         if timelapse_due():
             countdown1 = 0
         im = snap(can, countdown1=countdown1, effect='None')
@@ -193,7 +193,7 @@ def check_and_snap(force=False, countdown1=None):
                     except Exception, e:
                         tkMessageBox.showinfo("Upload Error", str(e) +
                                               '\nUpload Failed:%s' % e)
-                    
+
                     # signed_in = False
             can.delete("text")
             # can.create_text(WIDTH/2, HEIGHT - STATUS_H_OFFSET, text="Press button when ready", font=custom.CANVAS_FONT, tags="text")

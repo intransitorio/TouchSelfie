@@ -72,11 +72,11 @@ oauth2_refresh_period = 1800000
 restore_conf()
 
 ### set up GUI
-BUTTON_FONT = ('Times', 24)
-CANVAS_FONT = ("times", 50)
+BUTTON_FONT = ('Roboto', 24)
+CANVAS_FONT = ("Roboto", 50)
 
 ## usually not need to change these.
-EXT = 'jpg'     
+EXT = 'jpg'
 RAW_FILENAME = 'image.' + EXT
 PROC_FILENAME = 'photo.' + EXT
 
@@ -88,7 +88,7 @@ class curry:
     def __init__(self, callable, *args):
         self.callable = callable
         self.args = args
-    
+
     def __call__(self, *args):
         return self.callable(*self.args)
 
@@ -106,7 +106,7 @@ def display_logo(parent, logopng):
         else:
             scale = (.25 * SCREEN_H) / height
         photo = photo.resize((int(width * scale), int(height * scale)))
-        photo_tk = ImageTk.PhotoImage(photo) 
+        photo_tk = ImageTk.PhotoImage(photo)
     else:
         photo_tk = Tkinter.PhotoImage(file=logopng) ## works but not on raspberry pi
     try: ## subsequent calls only need config
@@ -134,7 +134,7 @@ def customize(master):
         entry.pack(side=Tkinter.RIGHT)
         frame.pack()
         return frame, entry
-    
+
     def bool_customizer(label, initial_val, listener):
         frame = Tkinter.Frame(self)
         var = Tkinter.BooleanVar()
@@ -151,7 +151,7 @@ def customize(master):
     def update_msg(var, wid):
         global emailMsg
         emailMsg = var.get()
-        
+
     def update_caption(var, wid):
         global photoCaption
         photoCaption = var.get()
@@ -159,7 +159,7 @@ def customize(master):
     def update_albumID(var, wid):
         global albumID
         albumID = var.get()
-        
+
     def update_countdown1(var, wid):
         global countdown1
         try:
@@ -188,9 +188,9 @@ def customize(master):
     def update_sign_me_in(var, wid):
         global SIGN_ME_IN
         wid.config(bg='white')
-        
+
         SIGN_ME_IN = var.get()
-        
+
     def update_archive(var):
         global ARCHIVE, archive_dir
         archive_dir = var.get()
@@ -198,12 +198,12 @@ def customize(master):
             ARCHIVE = True
         else:
             ARCHIVE = False
-        
+
     def update_logo(entry):
         if os.path.exists(logo_var.get()):
             entry.config(bg='white')
             logopng = logo_var.get()
-            if True: ## DISPLAY_LOGO 
+            if True: ## DISPLAY_LOGO
                 display_logo(self, logopng)
         else:
             entry.config(bg='red')
@@ -270,7 +270,7 @@ def customize(master):
         if not hasattr(self, 'albums'):
             self.albums = listalbums.getAlbums("kevin.osborn@gmail.com")
         listalbums.AlbumSelect(self, self.album_entry, self.albums)
-        
+
     string_customizer('Email Subject', emailSubject, update_subj)
     string_customizer('Email Msg', emailMsg, update_msg)
     string_customizer('Caption', photoCaption, update_caption)
@@ -281,7 +281,7 @@ def customize(master):
     Tkinter.Button(album_frame,
                    text="Lookup",
                    command=launch_album_select).pack()
-    
+
     string_customizer('Countdown1', countdown1, update_countdown1)
     string_customizer('Countdown2', countdown2, update_countdown2)
     string_customizer('Timelapse', TIMELAPSE, update_timelapse)
@@ -314,7 +314,7 @@ def customize(master):
     Tkinter.Button(buttonbox, text='Quit TouchSelfie', command=quit).pack(
         side=Tkinter.LEFT)
     buttonbox.pack()
-    
+
     if True: # DISPLAY_LOGO:
         display_logo(self, logopng)
 
@@ -333,8 +333,8 @@ if __name__ == '__main__':
     print ARCHIVE
     print archive_dir
     print logopng
-    
 
 
 
-    
+
+
